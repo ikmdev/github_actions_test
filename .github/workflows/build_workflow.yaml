@@ -26,3 +26,4 @@ jobs:
         uses: ikmdev/maven-clean-install-build-action@v1.0.0
         with:
           branch_name: ${{env.BRANCH_NAME}}
+          
