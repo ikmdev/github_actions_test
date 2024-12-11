@@ -17,6 +17,13 @@ jobs:
     name: Build Job
     runs-on: ubuntu-24.04
     steps:
+      - name: tag test
+        if: env.IS_TAG == 'true'
+        run: echo "tag test"
+
+      - name: test
+        run: echo "test"
+        
       - uses: actions/setup-java@v4
         with:
             java-version: '21'
