@@ -57,8 +57,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Java and Maven versions -->
-        <java.version>24</java.version>
-        <maven.version>3.9.11</maven.version>
+        <java.version>25</java.version>
+        <maven.version>4.0</maven.version>
 
 
         <!-- Clean Lifecycle -->
@@ -75,13 +75,13 @@
         <maven.project-info-reports-plugin.version>3.9.0</maven.project-info-reports-plugin.version>
 
         <!-- Command Line tooling -->
-        <maven.dependency-plugin.version>3.8.1</maven.dependency-plugin.version>
+        <maven.dependency-plugin.version>3.9.0</maven.dependency-plugin.version>
         <maven.assembly-plugin.version>3.7.1</maven.assembly-plugin.version>
         <maven.assembly.version>${maven.assembly-plugin.version}</maven.assembly.version>
         <maven.wrapper-plugin.version>3.3.2</maven.wrapper-plugin.version>
 
         <!-- Release plugins -->
-        <maven.gpg-plugin.version>3.2.7</maven.gpg-plugin.version>
+        <maven.gpg-plugin.version>3.2.8</maven.gpg-plugin.version>
         <maven.enforcer-plugin.version>3.5.0</maven.enforcer-plugin.version>
         <semver-enforcer-rule.version>0.9.33</semver-enforcer-rule.version>
         <maven.directory.plugin>1.0</maven.directory.plugin>
@@ -95,12 +95,13 @@
         <maven.github-flow.version>1.21.1-r11</maven.github-flow.version>
 
 
-        <sonatype.central.plugin.version>0.8.0</sonatype.central.plugin.version> <!-- Property for deploying to Maven Central -->
+        <sonatype.central.plugin.version>0.9.0</sonatype.central.plugin.version> <!-- Property for deploying to Maven Central -->
         <build-helper-maven-plugin.version>3.6.0</build-helper-maven-plugin.version>
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
 
         <maven.antrun.plugin>3.1.0</maven.antrun.plugin>
+        <maven.jar-plugin.version>3.4.2</maven.jar-plugin.version>
 
         <!--properties required for sonarqube analysis-->
         <sonar.organization>ikmdev</sonar.organization>
@@ -200,7 +201,7 @@
                                     <requireMavenVersion>
                                         <version>(3.9,)</version>
                                     </requireMavenVersion>
-                                </rules>    
+                                </rules>
                             </configuration>
                         </execution>
                         <execution>
@@ -213,7 +214,7 @@
                                     <requireJavaVersion>
                                         <version>${java.version}</version>
                                     </requireJavaVersion>
-                                </rules>    
+                                </rules>
                             </configuration>
                         </execution>
                     </executions>
@@ -331,6 +332,11 @@
                     <version>${maven.antrun.plugin}</version>
                 </plugin>
 
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven.jar-plugin.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -342,7 +348,7 @@
                     <licenseName>apache_v2</licenseName>
                 </configuration>
             </plugin>
-             <plugin>
+            <plugin>
                 <groupId>dev.ikm</groupId>
                 <artifactId>gitflow-maven-plugin</artifactId>
             </plugin>
@@ -549,7 +555,7 @@
                                         <requireMavenVersion>
                                             <version>(3.9,)</version>
                                         </requireMavenVersion>
-                                    </rules>    
+                                    </rules>
                                 </configuration>
                             </execution>
                             <execution>
@@ -562,7 +568,7 @@
                                         <requireJavaVersion>
                                             <version>${java.version}</version>
                                         </requireJavaVersion>
-                                    </rules>    
+                                    </rules>
                                 </configuration>
                             </execution>
                         </executions>
@@ -835,16 +841,98 @@
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
-                            <autoPublish>true</autoPublish>
-                            <waitUntil>published</waitUntil>
+                            <!--                            <autoPublish>true</autoPublish>-->
+                            <waitUntil>uploaded</waitUntil>
                             <waitMaxTime>14400</waitMaxTime>
                         </configuration>
+                        <executions>
+                            <execution>
+                                <id>central-publish</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>publish</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
 
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>deploy-ike-public</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>ike-public-releases</id>
+                    <name>IKE Public Releases</name>
+                    <url>https://nexus.tinkar.org/repository/ike-releases/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>ike-public-snapshots</id>
+                    <name>IKE Public Snapshots</name>
+                    <url>https://nexus.tinkar.org/repository/ike-snapshots/</url>
+                </snapshotRepository>
+            </distributionManagement>
 
+            <build>
+                <plugins>
+                    <!-- Ensure artifacts are signed when deploying -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Attach sources and javadoc for consumers -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jlink-standard</id>
+            <!-- no-op; modules that need it add build/plugin config under the same id -->
+        </profile>
+        <profile>
+            <id>create-installer</id>
+            <!-- no-op -->
+        </profile>
     </profiles>
 
 </project>
