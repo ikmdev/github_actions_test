@@ -92,7 +92,7 @@
         <maven.changes-plugin.version>2.12.1</maven.changes-plugin.version>
 
         <maven.sonarqube.version>5.1.0.4751</maven.sonarqube.version>
-        <maven.github-flow.version>1.21.1-r4</maven.github-flow.version>
+        <maven.github-flow.version>1.21.1-r11</maven.github-flow.version>
 
 
         <sonatype.central.plugin.version>0.8.0</sonatype.central.plugin.version> <!-- Property for deploying to Maven Central -->
@@ -105,7 +105,6 @@
         <!--properties required for sonarqube analysis-->
         <sonar.organization>ikmdev</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <maven.github-flow.version>1.21.1-r11</maven.github-flow.version>
     </properties>
 
     <modules>
@@ -285,6 +284,7 @@
                     <configuration>
                         <featureNamePattern>^(?!(((feature|hotfix|bugfix))\/(IKM|AR|IAT|IC|IKMC|IKDT|IKMD|IIA|IKMW|IKMM|TE)-\d+(-[0-9A-Za-z\-]*)*)|main|prod|master|dev).*$</featureNamePattern>
                         <separateFinishBranches>true</separateFinishBranches>
+                        <versionsMavenPluginVersion>${maven.versions.plugin}</versionsMavenPluginVersion>
                         <gitFlowConfig>
                             <developmentBranch>main</developmentBranch>
                             <productionBranch>main</productionBranch>
