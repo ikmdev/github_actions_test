@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 https://maven.apache.org/xsd/maven-4.1.0.xsd">
     <modelVersion>4.1.0</modelVersion>
     <parent/>
-    <artifactId>gitub_actions_test_java-parent</artifactId>
+    <artifactId>gitub-actions-test-java-parent</artifactId>
     <name>GitHub Actions Test Java Parent</name>
     <description>
         The Java Parent that helps to define the build processes that should be used across projects. This is versioned
