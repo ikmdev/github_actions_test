@@ -107,9 +107,9 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
-    <modules>
-        <module>java-parent</module>
-    </modules>
+    <subprojects>
+        <subproject>java-parent</subproject>
+    </subprojects>
 
     <build>
         <pluginManagement>
