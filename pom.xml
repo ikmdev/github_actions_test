@@ -105,7 +105,7 @@
         <!--properties required for sonarqube analysis-->
         <sonar.organization>ikmdev</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <maven.github-flow.version>1.11.1.111-rr2-SNAPSHOT</maven.github-flow.version>
+        <maven.github-flow.version>1.21.1-r11</maven.github-flow.version>
     </properties>
 
     <modules>
