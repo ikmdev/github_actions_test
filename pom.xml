@@ -5,7 +5,7 @@
     <modelVersion>4.1.0</modelVersion>
     <groupId>dev.ikm.build</groupId>
     <artifactId>gitub-actions-test-parent</artifactId>
-    <version>12.59.10</version>
+    <version>12.59.11-SNAPSHOT</version>
     <name>GitHub Actions General Build Parent</name>
     <description>
         The General Parent that helps to define the build processes that should be used across projects, regardless of.
