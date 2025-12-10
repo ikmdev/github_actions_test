@@ -51,7 +51,7 @@
     </organization>
 
     <properties>
-        <revision>12.59.3-SNAPSHOT</revision>
+        <revision>12.59.3</revision>
         <!-- Project Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
