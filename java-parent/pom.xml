@@ -3,7 +3,9 @@
          xmlns="http://maven.apache.org/POM/4.1.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 https://maven.apache.org/xsd/maven-4.1.0.xsd">
     <modelVersion>4.1.0</modelVersion>
-    <parent/>
+    <parent>
+        <relativePath>..</relativePath>
+    </parent>
     <artifactId>gitub-actions-test-java-parent</artifactId>
     <name>GitHub Actions Test Java Parent</name>
     <description>
