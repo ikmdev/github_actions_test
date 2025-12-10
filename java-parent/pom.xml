@@ -6,7 +6,7 @@
     <parent>
         <groupId>dev.ikm.build</groupId>
         <artifactId>gitub-actions-test-parent</artifactId>
-        <version>12.59.2-SNAPSHOT</version>
+        <version>12.59.3-SNAPSHOT</version>
     </parent>
     <artifactId>gitub-actions-test-java-parent</artifactId>
     <name>GitHub Actions Test Java Parent</name>
