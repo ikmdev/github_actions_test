@@ -4,7 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 https://maven.apache.org/xsd/maven-4.1.0.xsd">
     <modelVersion>4.1.0</modelVersion>
     <parent>
-        <relativePath>..</relativePath>
+        <groupId>dev.ikm.build</groupId>
+        <artifactId>gitub-actions-test-parent</artifactId>
+        <version>12.59.2-SNAPSHOT</version>
     </parent>
     <artifactId>gitub-actions-test-java-parent</artifactId>
     <name>GitHub Actions Test Java Parent</name>
